@@ -80,7 +80,7 @@ header .icons {
 
 header .icons button {
   height: 40px;
-  width: 10px;
+  width: 35px;
   font-size: 20px;
   border-radius: 10px;
   border: var(--border-thin-light);
