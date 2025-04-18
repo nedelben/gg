@@ -1,47 +1,30 @@
-// نحصل على الوسم الموجود فعلاً
-const themeMeta = document.getElementById("theme-color-meta");
+// تحديد العنصر meta
+const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-// تحديث اللون حسب الوضع
-function updateThemeColor(mode) {
-  if (mode === "light") {
-    themeMeta.setAttribute("content", "#89CFF0");
+// تحديد الزر المسؤول عن تبديل الوضع
+const toggleButton = document.querySelector('.toggle-theme');
+
+// تحديد الوضع الحالي
+let isLightMode = document.body.classList.contains('light');
+
+// تحديث لون theme-color بناءً على الوضع الحالي
+function updateThemeColor() {
+  if (isLightMode) {
+    themeMeta.setAttribute('content', '#ffffff'); // لون الوضع الفاتح
   } else {
-    themeMeta.setAttribute("content", "#333");
+    themeMeta.setAttribute('content', '#121212'); // لون الوضع الداكن
   }
 }
 
-// تطبيق الوضع
-function applyTheme(mode) {
-  document.body.classList.remove("light", "dark");
-  if (mode === "light") {
-    document.body.classList.add("light");
-  } else {
-    // لو حاب تسمي الكلاس الخاص بالوضع الداكن "dark"، ضيفه هنا
-    // بس حالياً أنت ما عندك كلاس "dark"، فنبقي فقط الوضع العادي
-  }
-  updateThemeColor(mode);
+// تبديل الوضع بين الفاتح والداكن
+function toggleMode() {
+  isLightMode = !isLightMode;
+  document.body.classList.toggle('light');
+  updateThemeColor();
 }
 
-// استرجاع الوضع المحفوظ أو النظامي
-function getInitialMode() {
-  const saved = localStorage.getItem("theme-mode");
-  if (saved) return saved;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
-}
+// إضافة مستمع للزر
+toggleButton.addEventListener('click', toggleMode);
 
-// تغيير الوضع عند الضغط على الزر
-function toggleTheme() {
-  currentMode = currentMode === "dark" ? "light" : "dark";
-  applyTheme(currentMode);
-  localStorage.setItem("theme-mode", currentMode);
-}
-
-// تشغيل عند تحميل الصفحة
-let currentMode = getInitialMode();
-window.addEventListener("DOMContentLoaded", () => {
-  applyTheme(currentMode);
-});
-
-// زر التبديل
-document.querySelector(".toggle-theme").addEventListener("click", toggleTheme);
-
+// تحديث اللون عند تحميل الصفحة
+updateThemeColor();
