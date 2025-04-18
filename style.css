@@ -185,14 +185,13 @@ main .logo p {
 
 .search-continer .btn-search a:hover {
   background-color: var(--hover-bg);
-  color: var(--text-mainn);
 }
 
 .search-continer .btn-search a {
   height: 40px;
   width: 200px;
   border-radius: 10px;
-  color: var(--text-main);
+  color: #fff;
   background-color: var(--brand-secondary);
   display: flex;
   align-items: center;
