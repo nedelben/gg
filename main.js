@@ -11,7 +11,7 @@ function updateThemeColor(mode) {
   if (mode === "light") {
     themeMeta.setAttribute("content", "#89CFF0"); // لون الوضع الفاتح
   } else {
-    themeMeta.setAttribute("content", "#121212"); // لون الوضع الداكن
+    themeMeta.setAttribute("content", "#333"); // لون الوضع الداكن
   }
 }
 
