@@ -9,7 +9,7 @@ if (!themeMeta) {
 // تحديث meta حسب الوضع الحالي
 function updateThemeColor(mode) {
   if (mode === "dark") {
-    themeMeta.setAttribute("content", "#121212");
+    themeMeta.setAttribute("content", "#333");
   } else {
     themeMeta.setAttribute("content", "#89CFF0");
   }
