@@ -41,9 +41,10 @@
   --text-main: #111;
   --text-dark: #000;
   --text-muted: #333;
+  --text-mainn: #fff;
 
   --accent-color: #ff2;
-  --hover-bg: #e5e5e5;
+  --hover-bg: #444;
 
   --border-thick-accent: 3px solid var(--accent-color);
   --border-thin-light: 1px solid var(--text-dark);
@@ -66,8 +67,12 @@ body {
   height: 100vh;
   background-color: var(--bg-main);
   color: var(--text-main);
+  display: flex;
+  flex-direction: column;
 }
-
+header{
+    flex: 1;
+}
 header .icons {
   display: flex;
   justify-content: space-between;
@@ -97,6 +102,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex: 2;
   background-color: var(--bg-main);
 }
 
@@ -143,7 +149,7 @@ main .logo p {
 
 .search-continer .informatoin a:last-child img {
   width: 20px;
-  margin: 0 0 0 5px;
+  margin: 0 0 0 2px;
 }
 
 .search-continer input {
@@ -178,6 +184,7 @@ main .logo p {
 
 .search-continer .btn-search a:hover {
   background-color: var(--hover-bg);
+  color: var(--text-mainn);
 }
 
 .search-continer .btn-search a {
@@ -193,8 +200,8 @@ main .logo p {
 }
 
 @media (max-width: 700px) {
-    main .logo h1 {
-        font-size: 20px;
+    main .logo  {
+        font-size: 25px;
       }
   main .logo p {
     display: none;
@@ -202,5 +209,11 @@ main .logo p {
 
   .search-continer .btn-search a {
     width: 100px;
+  }
+  .search-continer .informatoin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 }
