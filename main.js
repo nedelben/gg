@@ -1,18 +1,19 @@
- // الدالة لتغيير الكلاس بين الوضع الفاتح والداكن
-function toggleMode() {
-    // تبديل الكلاس light على body
-    document.body.classList.toggle("light");
-  
-    // الحصول على وسم meta الذي يتحكم في لون شريط العنوان في الهاتف
-    const meta = document.getElementById("theme-color-meta");
-  
-    // التحقق إذا كنا في الوضع الفاتح الآن
-    const isLightMode = document.body.classList.contains("light");
-  
-    // تغيير قيمة content في meta حسب الوضع الحالي
-    meta.setAttribute("content", isLightMode ? "#89CFF0" : "#333");
-  }
-  
-  // ربط الزر بحدث الضغط لتنفيذ التبديل
-  document.querySelector(".toggle-theme").addEventListener("click", toggleMode);
-  
+theme-color
+const themeMeta = document.createElement('meta');
+themeMeta.name = "theme-color";
+
+// دالة لتحديث اللون حسب الوضع
+const updateThemeColor = () => {
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  themeMeta.content = isDark ? "#121212" : "#ffffff"; // غيّر الألوان حسب رغبتك
+};
+
+// تنفيذ الدالة أولاً
+updateThemeColor();
+
+// إضافة الوسم إلى <head>
+document.head.appendChild(themeMeta);
+
+// الاستماع لتغيّر الوضع وتحديث اللون
+window.matchMedia('(prefers-color-scheme: dark)')
+  .addEventListener("change", updateThemeColor);
