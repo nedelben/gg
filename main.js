@@ -1,48 +1,46 @@
-// جلب أو إنشاء وسم meta لتغيير لون التبويب في الهواتف
-let themeMeta = document.querySelector('meta[name="theme-color"]');
-if (!themeMeta) {
-  themeMeta = document.createElement('meta');
-  themeMeta.name = "theme-color";
-  document.head.appendChild(themeMeta);
-}
+// نحصل على الوسم الموجود فعلاً
+const themeMeta = document.getElementById("theme-color-meta");
 
-// تحديث لون الـ meta حسب الوضع الحالي
+// تحديث اللون حسب الوضع
 function updateThemeColor(mode) {
   if (mode === "light") {
-    themeMeta.setAttribute("content", "#89CFF0"); // لون الوضع الفاتح
+    themeMeta.setAttribute("content", "#89CFF0");
   } else {
-    themeMeta.setAttribute("content", "#333"); // لون الوضع الداكن
+    themeMeta.setAttribute("content", "#333");
   }
 }
 
-// تطبيق كلاس الوضع على <body>
+// تطبيق الوضع
 function applyTheme(mode) {
+  document.body.classList.remove("light", "dark");
   if (mode === "light") {
     document.body.classList.add("light");
   } else {
-    document.body.classList.remove("light"); // الوضع الداكن = بدون كلاس light
+    // لو حاب تسمي الكلاس الخاص بالوضع الداكن "dark"، ضيفه هنا
+    // بس حالياً أنت ما عندك كلاس "dark"، فنبقي فقط الوضع العادي
   }
   updateThemeColor(mode);
 }
 
-// استرجاع الوضع من localStorage أو من إعدادات النظام
+// استرجاع الوضع المحفوظ أو النظامي
 function getInitialMode() {
-  const savedMode = localStorage.getItem("theme-mode");
-  if (savedMode) return savedMode;
-
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  return systemPrefersDark ? "dark" : "light";
+  const saved = localStorage.getItem("theme-mode");
+  if (saved) return saved;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
 }
 
-// تنفيذ عند تحميل الصفحة
+// تغيير الوضع عند الضغط على الزر
+function toggleTheme() {
+  currentMode = currentMode === "dark" ? "light" : "dark";
+  applyTheme(currentMode);
+  localStorage.setItem("theme-mode", currentMode);
+}
+
+// تشغيل عند تحميل الصفحة
 let currentMode = getInitialMode();
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
   applyTheme(currentMode);
 });
 
-// عند الضغط على زر التبديل
-document.querySelector(".toggle-theme").addEventListener("click", () => {
-  currentMode = currentMode === "light" ? "dark" : "light";
-  applyTheme(currentMode);
-  localStorage.setItem("theme-mode", currentMode);
-});
+// زر التبديل
+document.querySelector(".toggle-theme").addEventListener("click", toggleTheme);
