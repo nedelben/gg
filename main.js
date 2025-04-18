@@ -5,7 +5,7 @@ themeMeta.name = "theme-color";
 // دالة لتحديث اللون حسب الوضع
 const updateThemeColor = () => {
   const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  themeMeta.content = isDark ? "#121212" : "#ffffff"; // غيّر الألوان حسب رغبتك
+  themeMeta.content = isDark ? "#333" : "#89CFF0"; // غيّر الألوان حسب رغبتك
 };
 
 // تنفيذ الدالة أولاً
