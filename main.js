@@ -1,30 +1,12 @@
-// تحديد العنصر meta
-const themeMeta = document.querySelector('meta[name="theme-color"]');
-
-// تحديد الزر المسؤول عن تبديل الوضع
-const toggleButton = document.querySelector('.toggle-theme');
-
-// تحديد الوضع الحالي
-let isLightMode = document.body.classList.contains('light');
-
-// تحديث لون theme-color بناءً على الوضع الحالي
-function updateThemeColor() {
-  if (isLightMode) {
-    themeMeta.setAttribute('content', '#ffffff'); // لون الوضع الفاتح
-  } else {
-    themeMeta.setAttribute('content', '#121212'); // لون الوضع الداكن
-  }
-}
-
-// تبديل الوضع بين الفاتح والداكن
+// الدالة لتغيير الكلاس بين الوضع الفاتح والداكن
 function toggleMode() {
-  isLightMode = !isLightMode;
-  document.body.classList.toggle('light');
-  updateThemeColor();
+  document.body.classList.toggle("light");
+
+  // تحديث اللون داخل الوسم meta حسب الوضع الحالي
+  const meta = document.getElementById("theme-color-meta");
+  const isLightMode = document.body.classList.contains("light");
+  meta.setAttribute("content", isLightMode ? "#89CFF0" : "#333");
 }
 
-// إضافة مستمع للزر
-toggleButton.addEventListener('click', toggleMode);
-
-// تحديث اللون عند تحميل الصفحة
-updateThemeColor();
+// إضافة حدث عند الضغط على الزر
+document.querySelector(".toggle-theme").addEventListener("click", toggleMode);
