@@ -1,4 +1,4 @@
-// إنشاء أو جلب وسم meta لتحديث لون التبويب في الهواتف
+// جلب أو إنشاء وسم meta لتغيير لون التبويب في الهواتف
 let themeMeta = document.querySelector('meta[name="theme-color"]');
 if (!themeMeta) {
   themeMeta = document.createElement('meta');
@@ -6,42 +6,43 @@ if (!themeMeta) {
   document.head.appendChild(themeMeta);
 }
 
-// تحديث meta حسب الوضع الحالي
+// تحديث لون الـ meta حسب الوضع الحالي
 function updateThemeColor(mode) {
-  if (mode === "dark") {
-    themeMeta.setAttribute("content", "#333");
+  if (mode === "light") {
+    themeMeta.setAttribute("content", "#89CFF0"); // لون الوضع الفاتح
   } else {
-    themeMeta.setAttribute("content", "#89CFF0");
+    themeMeta.setAttribute("content", "#121212"); // لون الوضع الداكن
   }
 }
 
-// تطبيق الوضع على <body>
+// تطبيق كلاس الوضع على <body>
 function applyTheme(mode) {
-  document.body.classList.remove("light", "dark");
-  if (mode === "dark") {
-    document.body.classList.remove("light");
-  } else {
+  if (mode === "light") {
     document.body.classList.add("light");
+  } else {
+    document.body.classList.remove("light"); // الوضع الداكن = بدون كلاس light
   }
   updateThemeColor(mode);
 }
 
-// استرجاع الوضع المفضل أو النظام
+// استرجاع الوضع من localStorage أو من إعدادات النظام
 function getInitialMode() {
   const savedMode = localStorage.getItem("theme-mode");
   if (savedMode) return savedMode;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return systemPrefersDark ? "dark" : "light";
 }
 
-// عند التحميل
+// تنفيذ عند تحميل الصفحة
 let currentMode = getInitialMode();
 document.addEventListener("DOMContentLoaded", () => {
   applyTheme(currentMode);
 });
 
-// تبديل الوضع عند الضغط
+// عند الضغط على زر التبديل
 document.querySelector(".toggle-theme").addEventListener("click", () => {
-  currentMode = currentMode === "dark" ? "light" : "dark";
+  currentMode = currentMode === "light" ? "dark" : "light";
   applyTheme(currentMode);
   localStorage.setItem("theme-mode", currentMode);
 });
