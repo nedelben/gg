@@ -231,7 +231,7 @@ main .logo p {
     gap: 10px;
   }
   header .logo {
-    display: block;
+    display: contents;
   }
   main .logo {
     display: none;
