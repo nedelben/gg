@@ -1,18 +1,18 @@
-// الدالة لتغيير الكلاس بين الوضع الفاتح والداكن
+ // الدالة لتغيير الكلاس بين الوضع الفاتح والداكن
 function toggleMode() {
+    // تبديل الكلاس light على body
     document.body.classList.toggle("light");
-}
-
-// إضافة حدث عند الضغط على الزر
-document.querySelector(".toggle-theme").addEventListener("click", toggleMode);
-
-function updateThemeColor() {
+  
+    // الحصول على وسم meta الذي يتحكم في لون شريط العنوان في الهاتف
     const meta = document.getElementById("theme-color-meta");
-    const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    meta.setAttribute("content", darkMode ? "#333" : "#89CFF0");
+  
+    // التحقق إذا كنا في الوضع الفاتح الآن
+    const isLightMode = document.body.classList.contains("light");
+  
+    // تغيير قيمة content في meta حسب الوضع الحالي
+    meta.setAttribute("content", isLightMode ? "#89CFF0" : "#333");
   }
-
-  updateThemeColor(); // تشغيله أول مرة
-
-  // إعادة التشغيل إذا تغير الوضع
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateThemeColor);
+  
+  // ربط الزر بحدث الضغط لتنفيذ التبديل
+  document.querySelector(".toggle-theme").addEventListener("click", toggleMode);
+  
