@@ -44,3 +44,4 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // زر التبديل
 document.querySelector(".toggle-theme").addEventListener("click", toggleTheme);
+
